@@ -1,0 +1,86 @@
+environment: @environment@
+
+spring:
+  application:
+    name: rocketmq-test
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+    default-property-inclusion: non_null
+  datasource:
+    druid:
+      url: jdbc:mysql://@db.url@?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      username: @db.username@
+      password: @db.password@
+      #下面这些参数为固定参数,无需修改
+      filters: wall
+      db-type: mysql
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
+      # 连接池配置
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      filter:
+        config:
+          enabled: false
+        stat:
+          enabled: false
+        wall:
+          enabled: true
+      web-stat-filter:
+        enabled: false
+      stat-view-servlet:
+        enabled: false
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  global-config:
+    id-type: 0
+    db-column-underline: false
+
+#rocketmq:
+#  namesrvAddr: @rocketmq.namesrvAddr@
+#  instanceName: ROCKET_MQ_TEST
+#  producerGroup: testProducer
+#  topic: NICE_2020
+#  subExpression: fabulous
+#  consumerGroup: bestGroup
+
+rocketmq:
+#  namesrvAddr: @rocketmq.namesrvAddr@
+#  instanceName: ROCKET_MQ_TEST
+#  producerGroup: testProducer
+#  topic: TEST
+#  subExpression: testTag
+#  consumerGroup: testCompliance2Group
+#  consumerGroup: testGroup
+
+  name-server: @rocketmq.namesrvAddr@
+#  access-channel:
+  producer:
+    group: testProducer
+#    compress-message-body-threshold: 0
+#    enable-msg-trace: true
+#    max-message-size: 0
+#    retry-next-server: false
+#    retry-times-when-send-async-failed: 2
+#    retry-times-when-send-failed: 2
+#    send-message-timeout: 6000
+
+
+logging:
+  level:
+    root: info
+    com.jemmy.rocketmq.test: debug
+    RocketmqClient: warn
+server:
+  port: 8083

@@ -1,0 +1,8 @@
+projectPath: /Users/chengzhujiang/Documents/1004_own/rocketmq-test/rocketmq-test-dal
+tableNames:
+  - table1
+dalPackage: com.jemmy.rocketmq.test.dal
+datasource:
+  url: jdbc:mysql://localhost:3306/rocketmq-test
+  username: root
+  password: root_pwd
